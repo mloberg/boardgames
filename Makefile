@@ -20,6 +20,11 @@ site: ## Build production site
 	@NODE_ENV=production hugo --cleanDestinationDir --gc --minify
 .PHONY: site
 
+deploy: site ## Deploy site
+	@echo "+ $@"
+	@hugo deploy
+.PHONY: deploy
+
 ##
 ## Index
 ## ---------------------------------------------------------------------------

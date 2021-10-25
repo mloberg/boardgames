@@ -8,10 +8,22 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var resetSettings bool
 var setupCmd = &cobra.Command{
 	Use:   "setup",
 	Short: "Setup MeiliSearch index",
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if resetSettings {
+			reset, err := index.ResetSettings()
+			if err != nil {
+				return err
+			}
+
+			if err := waitForUpdate(reset.UpdateID); err != nil {
+				return err
+			}
+		}
+
 		filters, err := index.UpdateFilterableAttributes(&[]string{"type", "minplayers", "maxplayers", "maxplaytime", "rating", "weight"})
 		if err != nil {
 			return err
@@ -42,6 +54,8 @@ var setupCmd = &cobra.Command{
 }
 
 func init() {
+	setupCmd.Flags().BoolVarP(&resetSettings, "reset", "r", false, "Reset index settings")
+
 	rootCmd.AddCommand(setupCmd)
 }
 
