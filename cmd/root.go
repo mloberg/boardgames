@@ -22,6 +22,9 @@ var rootCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
+		if key == "" {
+			key = os.Getenv("MEILISEARCH_API_KEY")
+		}
 
 		indexName, err := cmd.Flags().GetString("index")
 		if err != nil {
@@ -44,7 +47,7 @@ func Execute() error {
 
 func init() {
 	rootCmd.PersistentFlags().StringP("url", "u", one(os.Getenv("MEILISEARCH_HOST"), "http://localhost:7700"), "The MeiliSearch URL")
-	rootCmd.PersistentFlags().StringP("key", "k", os.Getenv("MEILISEARCH_API_KEY"), "The MeiliSearch API Key")
+	rootCmd.PersistentFlags().StringP("key", "k", "", "The MeiliSearch API Key")
 	rootCmd.PersistentFlags().StringP("index", "i", one(os.Getenv("MEILISEARCH_INDEX"), "boardgames"), "The MeiliSearch index")
 }
 
