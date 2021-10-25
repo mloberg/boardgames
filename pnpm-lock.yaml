@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@meilisearch/instant-meilisearch': ^0.5.8
+  '@tailwindcss/forms': ^0.3.4
   autoprefixer: ^10.3.7
   eslint: ^8.1.0
   eslint-config-prettier: ^8.3.0
@@ -19,6 +20,7 @@ dependencies:
   instantsearch.js: 4.32.0
 
 devDependencies:
+  '@tailwindcss/forms': 0.3.4_tailwindcss@2.2.17
   autoprefixer: 10.3.7_postcss@8.3.11
   eslint: 8.1.0
   eslint-config-prettier: 8.3.0_eslint@8.1.0
@@ -316,6 +318,15 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+    dev: true
+
+  /@tailwindcss/forms/0.3.4_tailwindcss@2.2.17:
+    resolution: {integrity: sha512-vlAoBifNJUkagB+PAdW4aHMe4pKmSLroH398UPgIogBFc91D2VlHUxe4pjxQhiJl0Nfw53sHSJSQBSTQBZP3vA==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0'
+    dependencies:
+      mini-svg-data-uri: 1.4.3
+      tailwindcss: 2.2.17_fa866e6aa6eb85ed70431566fb699b34
     dev: true
 
   /@types/google.maps/3.46.0:
@@ -1705,6 +1716,11 @@ packages:
   /min-indent/1.0.1:
     resolution: {integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==}
     engines: {node: '>=4'}
+    dev: true
+
+  /mini-svg-data-uri/1.4.3:
+    resolution: {integrity: sha512-gSfqpMRC8IxghvMcxzzmMnWpXAChSA+vy4cia33RgerMS8Fex95akUyQZPbxJJmeBGiGmK7n/1OpUX8ksRjIdA==}
+    hasBin: true
     dev: true
 
   /minimatch/3.0.4:

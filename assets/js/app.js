@@ -18,20 +18,20 @@ search.addWidgets([
         showSubmit: false,
         placeholder: 'Search',
         cssClasses: {
-            input: 'border border-2 ring-1 pl-2 py-1',
+            input: 'mb-2 w-full',
             reset: '-ml-6',
         },
     }),
     sortBy({
         container: '#sort-by',
         items: [
-            { label: 'Relevant', value: indexName },
+            { label: 'Sort', value: indexName },
             { label: 'Name', value: `${indexName}:name:asc` },
             { label: 'Rating', value: `${indexName}:rating:desc` },
             { label: 'Complexity', value: `${indexName}:weight:desc` },
         ],
         cssClasses: {
-            select: 'border border-2 ring-1 pl-2 py-1',
+            select: 'mb-2 w-full',
         },
     }),
     toggleRefinement({
@@ -39,7 +39,8 @@ search.addWidgets([
         attribute: 'type',
         on: 'boardgame',
         cssClasses: {
-            checkbox: 'mr-2',
+            label: 'inline-flex items-center',
+            labelText: 'ml-2',
         },
         templates: {
             labelText: 'Hide Expansions',

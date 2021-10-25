@@ -17,15 +17,15 @@ serve: ## Serve site
 
 site: ## Build production site
 	@echo "+ $@"
-	@NODE_ENV=production hugo --cleanDestinationDir --minify
+	@NODE_ENV=production hugo --cleanDestinationDir --gc --minify
 .PHONY: site
 
 ##
 ## Index
 ## ---------------------------------------------------------------------------
 
-build: bin/bg ## Build the executable
-.PHONY: build
+cli: bin/bg ## Build the executable
+.PHONY: cli
 
 bin/bg: **/*.go
 	@go build -o bin/bg

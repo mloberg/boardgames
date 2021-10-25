@@ -4,5 +4,25 @@ title = 'Board Games'
 disableKinds = ["taxonomy", "term", "RSS", "sitemap"]
 
 [params]
-    SearchURL = "http://localhost:7700"
-    SearchAPIKey = ""
+    meilisearch_host = "http://localhost:7700"
+    meilisearch_api_key = ""
+
+[deployment]
+
+[[deployment.targets]]
+name = "s3"
+URL = "s3://games.mlo.io?region=us-east-2"
+
+[[deployment.matchers]]
+pattern = "^.+\\.(js|css|svg|ttf)$"
+cacheControl = "max-age=31536000, no-transform, public"
+gzip = true
+
+[[deployment.matchers]]
+pattern = "^.+\\.(png|jpg)$"
+cacheControl = "max-age=31536000, no-transform, public"
+gzip = false
+
+[[deployment.matchers]]
+pattern = "^.+\\.(html|xml|json)$"
+gzip = true
