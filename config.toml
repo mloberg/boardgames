@@ -1,0 +1,8 @@
+baseURL = 'http://games.mlo.io/'
+languageCode = 'en-us'
+title = 'Board Games'
+disableKinds = ["taxonomy", "term", "RSS", "sitemap"]
+
+[params]
+    SearchURL = "http://localhost:7700"
+    SearchAPIKey = ""

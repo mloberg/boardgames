@@ -15,6 +15,11 @@ serve: ## Serve site
 	@hugo server
 .PHONY: serve
 
+site: ## Build production site
+	@echo "+ $@"
+	@NODE_ENV=production hugo --cleanDestinationDir --minify
+.PHONY: site
+
 ##
 ## Index
 ## ---------------------------------------------------------------------------
@@ -44,9 +49,10 @@ mod: ## Make sure go.mod is up to date
 	@go mod tidy
 .PHONY: mod
 
-lint: ## Lint Go code
+lint: ## Lint code
 	@echo "+ $@"
 	@golangci-lint run
+	@pnpm run lint
 .PHONY: lint
 
 generate: ## Autogenerate docs and resources

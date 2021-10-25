@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}" class="antialiased">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Board Games</title>
+  {{ $style := resources.Get "css/app.css" | postCSS }}
+  {{ if hugo.IsProduction }}
+  {{ $style = $style | minify | fingerprint | resources.PostProcess }}
+  {{ end }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+</head>
+<body class="body-font font-sans tracking-wider leading-normal">
+  <main class="container px-5 p-24 mx-auto">
+    <h1 class="text-center text-lg mb-12">board games</h1>
+
+    <div class="flex mb-6">
+      <div class="self-center" id="sort-by"></div>
+      <label class="block self-center ml-4">
+        <div id="searchbox"></div>
+      </label>
+      <label class="block self-center ml-4">
+        <input class="border ring-1 pl-2 py-1" type="number" id="players" placeholder="Players">
+      </label>
+      <label class="block self-center ml-4">
+        <input class="border ring-1 pl-2 py-1" type="number" id="playtime" placeholder="Play Time">
+      </label>
+      <div class="self-center ml-4" id="expansions"></div>
+    </div>
+
+    <!-- <p class="mb-6"><a href="https://boardgamegeek.com/collection/user/mloberg">BoardGameGeek Collection</a></p> -->
+
+    <div id="hits"></div>
+  </main>
+
+  {{ $params := dict "meiliHost" (.Param "SearchURL") "meiliApiKey" (.Param "SearchAPIKey") }}
+  {{ $script := resources.Get "js/app.js" | js.Build (dict "params" $params) }}
+  {{ if hugo.IsProduction }}
+  {{ $script = $script | minify | fingerprint }}
+  {{ end }}
+  <script src="{{ $script.RelPermalink }}"></script>
+</body>
+</html>

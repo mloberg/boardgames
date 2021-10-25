@@ -1,0 +1,25 @@
+{
+    "private": true,
+    "scripts": {
+        "lint": "eslint --cache ."
+    },
+    "dependencies": {
+        "@meilisearch/instant-meilisearch": "^0.5.8",
+        "instantsearch.js": "^4.32.0"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.3.7",
+        "eslint": "^8.1.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-unicorn": "^37.0.1",
+        "postcss": "^8.3.11",
+        "postcss-cli": "^9.0.1",
+        "prettier": "^2.4.1",
+        "tailwindcss": "^2.2.17"
+    },
+    "browserslist": [
+        "> 2%"
+    ]
+}
