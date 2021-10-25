@@ -9,8 +9,7 @@ import (
 
 var index *meilisearch.Index
 var rootCmd = &cobra.Command{
-	Use:   "bg <username>",
-	Args:  cobra.ExactArgs(1),
+	Use:   "bg",
 	Short: "Load board games into MeiliSearch",
 	Long:  `Grab a user's collection from BoardGameGeek and load it into MeiliSearch`,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
