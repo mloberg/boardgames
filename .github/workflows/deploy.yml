@@ -1,0 +1,35 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.19.0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 0.88.1
+          extended: true
+      - run: hugo --cleanDestinationDir --gc --minify
+        env:
+          NODE_ENV: production
+          HUGOxPARAMSxMEILISEARCH_HOST: https://search.mlo.io
+          HUGOxPARAMSxMEILISEARCH_API_KEY: ${{ secrets.MEILISEARCH_PUBLIC_KEY }}
+      - run: hugo deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
