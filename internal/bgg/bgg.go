@@ -15,7 +15,7 @@ type Client struct {
 
 func New() *Client {
 	r := resty.New()
-	r.SetHostURL("https://www.boardgamegeek.com/xmlapi2")
+	r.SetBaseURL("https://www.boardgamegeek.com/xmlapi2")
 	r.SetRetryCount(3)
 	r.SetRetryWaitTime(time.Second)
 	r.AddRetryCondition(func(r *resty.Response, e error) bool {
