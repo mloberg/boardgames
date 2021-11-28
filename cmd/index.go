@@ -13,6 +13,7 @@ import (
 type document map[string]interface{}
 
 var refresh bool
+var clear bool
 var indexCmd = &cobra.Command{
 	Use:   "index <username>",
 	Args:  cobra.ExactArgs(1),
@@ -73,6 +74,16 @@ var indexCmd = &cobra.Command{
 		}
 		fmt.Println()
 
+		if clear {
+			delete, err := index.DeleteAllDocuments()
+			if err != nil {
+				return err
+			}
+			if err := waitForUpdate(delete.UpdateID); err != nil {
+				return err
+			}
+		}
+
 		update, err := index.AddDocuments(docs)
 		if err != nil {
 			return err
@@ -84,6 +95,7 @@ var indexCmd = &cobra.Command{
 
 func init() {
 	indexCmd.Flags().BoolVarP(&refresh, "refresh", "r", false, "Replace documents with fresh data")
+	indexCmd.Flags().BoolVarP(&clear, "clear", "c", false, "Delete all documents")
 
 	rootCmd.AddCommand(indexCmd)
 }
