@@ -29,6 +29,7 @@ func New() *Client {
 func (c *Client) GetCollection(username string) (*Collection, error) {
 	resp, err := c.client.R().
 		SetQueryParam("username", username).
+		SetQueryParam("own", "1").
 		Get("/collection")
 	if err != nil {
 		return nil, err
