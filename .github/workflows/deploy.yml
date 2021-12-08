@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
+    permissions:
+      id-token: write
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2.0.1
@@ -29,7 +31,8 @@ jobs:
           NODE_ENV: production
           HUGOxPARAMSxMEILISEARCH_HOST: https://search.mlo.io
           HUGOxPARAMSxMEILISEARCH_API_KEY: ${{ secrets.MEILISEARCH_PUBLIC_KEY }}
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::603767838523:role/games
       - run: hugo deploy
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
