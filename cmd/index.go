@@ -79,7 +79,7 @@ var indexCmd = &cobra.Command{
 			if err != nil {
 				return err
 			}
-			if err := waitForUpdate(delete.UpdateID); err != nil {
+			if err := waitForUpdate(delete.UID); err != nil {
 				return err
 			}
 		}
@@ -89,7 +89,7 @@ var indexCmd = &cobra.Command{
 			return err
 		}
 
-		return waitForUpdate(update.UpdateID)
+		return waitForUpdate(update.UID)
 	},
 }
 

@@ -19,7 +19,7 @@ var setupCmd = &cobra.Command{
 				return err
 			}
 
-			if err := waitForUpdate(reset.UpdateID); err != nil {
+			if err := waitForUpdate(reset.UID); err != nil {
 				return err
 			}
 		}
@@ -39,13 +39,13 @@ var setupCmd = &cobra.Command{
 			return err
 		}
 
-		if err := waitForUpdate(filters.UpdateID); err != nil {
+		if err := waitForUpdate(filters.UID); err != nil {
 			return err
 		}
-		if err := waitForUpdate(search.UpdateID); err != nil {
+		if err := waitForUpdate(search.UID); err != nil {
 			return err
 		}
-		if err := waitForUpdate(sort.UpdateID); err != nil {
+		if err := waitForUpdate(sort.UID); err != nil {
 			return err
 		}
 
@@ -61,16 +61,19 @@ func init() {
 
 func waitForUpdate(updateID int64) error {
 	for i := 0; i < 5; i++ {
-		status, err := index.GetUpdateStatus(updateID)
+		task, err := index.GetTask(updateID)
 		if err != nil {
 			return err
 		}
-		if status.Status == meilisearch.UpdateStatusProcessed {
+
+		if task.Status == meilisearch.TaskStatusSucceeded {
 			return nil
 		}
-		if status.Status == meilisearch.UpdateStatusFailed {
-			return fmt.Errorf("could not update index: %s", status.Error)
+
+		if task.Status == meilisearch.TaskStatusFailed {
+			return fmt.Errorf("could not update index: %s", task.Error.Message)
 		}
+
 		time.Sleep(time.Second)
 	}
 
