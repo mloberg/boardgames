@@ -13,16 +13,16 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.0.1
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@c3b53f6a16e57305370b4ae5a540c2077a1d50dd # pin@v2
         with:
           version: 6.19.0
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version-file: .tool-versions
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - uses: peaceiris/actions-hugo@v2
+      - uses: peaceiris/actions-hugo@16361eb4acea8698b220b76c0d4e84e1fd22c61d # pin@v2
         with:
           hugo-version: 0.88.1
           extended: true
@@ -31,7 +31,7 @@ jobs:
           NODE_ENV: production
           HUGOxPARAMSxMEILISEARCH_HOST: https://search.mlo.io
           HUGOxPARAMSxMEILISEARCH_API_KEY: ${{ secrets.MEILISEARCH_PUBLIC_KEY }}
-      - uses: aws-actions/configure-aws-credentials@v1
+      - uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838 # pin@v1
         with:
           aws-region: us-east-2
           role-to-assume: arn:aws:iam::603767838523:role/games
