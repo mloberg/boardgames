@@ -4,8 +4,8 @@
         "lint": "eslint --cache ."
     },
     "dependencies": {
-        "@meilisearch/instant-meilisearch": "^0.6.0",
-        "instantsearch.js": "^4.37.2"
+        "@meilisearch/instant-meilisearch": "^0.10.1",
+        "instantsearch.js": "^4.50.3"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.3.4",
